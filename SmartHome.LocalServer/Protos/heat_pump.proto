@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+import "google/protobuf/any.proto";
+
+option csharp_namespace = "SmartHome.Protos.HeatPump";
+
+service HeatPump {
+  rpc GetParameter (GetParameterRequest) returns  (GetParameterResponse);
+}
+
+message GetParameterRequest{
+  string param_name = 1;
+}
+
+message GetParameterResponse{
+  Result result = 1;
+  string value = 2;
+  string value_type = 3;
+}
+
+
+
+enum Result {
+  DEFAULT = 0;
+  OK = 1;
+  NOK = 2;
+}
