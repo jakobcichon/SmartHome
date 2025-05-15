@@ -15,6 +15,7 @@ namespace SmartHomeClientApp
                 });
 
             builder.Services.AddMauiBlazorWebView();
+            builder.Services.AddGrpcClient<>;
 
 #if DEBUG
     		builder.Services.AddBlazorWebViewDeveloperTools();
