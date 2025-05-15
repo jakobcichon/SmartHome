@@ -4,7 +4,7 @@ option csharp_namespace="SmartHome.Protos";
 package ProtosPackage;
 
 service HeatPump {
-  rpc GetParameter (GetParameterRequest) returns  (GetParameterResponse);
+  rpc GetParameter (GetParameterRequest) returns (GetParameterResponse);
 }
 
 message GetParameterRequest{
