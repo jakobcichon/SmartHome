@@ -1,0 +1,15 @@
+[
+  {
+    "Name": "New Profile",
+    "Projects": [
+      {
+        "Path": "..\\SmartHome.LocalServer\\SmartHome.LocalServer.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "..\\SmartHome.MobileApp\\SmartHome.MobileApp.csproj",
+        "Action": "Start"
+      }
+    ]
+  }
+]
