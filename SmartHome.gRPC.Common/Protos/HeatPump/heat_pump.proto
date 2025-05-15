@@ -1,10 +1,9 @@
 syntax = "proto3";
 
-import "google/protobuf/any.proto";
+option csharp_namespace="SmartHome.Protos";
+package ProtosPackage;
 
-option csharp_namespace = "Protos.HeatPump";
-
-service HeatPumpService {
+service HeatPump {
   rpc GetParameter (GetParameterRequest) returns  (GetParameterResponse);
 }
 
@@ -17,8 +16,6 @@ message GetParameterResponse{
   string value = 2;
   string value_type = 3;
 }
-
-
 
 enum Result {
   DEFAULT = 0;

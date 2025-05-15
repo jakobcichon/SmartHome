@@ -1,5 +1,5 @@
 using Grpc.Core;
-using SmartHome.Protos.HeatPump;
+using SmartHome.Protos;
 
 namespace SmartHome.LocalServer.Services
 {

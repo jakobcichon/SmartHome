@@ -16,8 +16,8 @@
         </PackageReference>
     </ItemGroup>
 
-	<ItemGroup>
-		<Protobuf Include="Protos\heat_pump.proto" GrpcService="Server"/>
-	</ItemGroup>
+    <ItemGroup>
+      <ProjectReference Include="..\SmartHome.gRPC.Common\SmartHome.gRPC.Common.csproj" />
+    </ItemGroup>
 
 </Project>
