@@ -20,7 +20,7 @@ public static class MauiProgram
 
         builder.Services.AddScoped(services =>
         {
-            return new HeatPump.HeatPumpClient(GrpcChannel.ForAddress("https://localhost:5001"));
+            return new HeatPump.HeatPumpClient(GrpcChannel.ForAddress("https://localhost:7234"));
         });
 
 #if DEBUG

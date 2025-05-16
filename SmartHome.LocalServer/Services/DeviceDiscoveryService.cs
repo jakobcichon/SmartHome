@@ -7,7 +7,7 @@ using System.Text;
 
 namespace SmartHome.LocalServer.Services
 {
-    public class DeviceDiscoverService(IOptions<SmartHomeSettingsModel> options) : BackgroundService
+    public class DeviceDiscoveryService(IOptions<SmartHomeSettingsModel> options) : BackgroundService
     {
         private readonly SmartHomeSettingsModel _options = options.Value;
 
@@ -18,7 +18,9 @@ namespace SmartHome.LocalServer.Services
                 return;
             }
 
-            using UdpClient udpClient = new(this._options.LocalDeviceUdpPort!.Value);
+            var port = this._options.LocalDeviceUdpPort!.Value;
+
+            using UdpClient udpClient = new(port);
             udpClient.EnableBroadcast = true;
 
             while (!stoppingToken.IsCancellationRequested)
@@ -28,14 +30,18 @@ namespace SmartHome.LocalServer.Services
                 
                 if (Encoding.UTF8.GetString(result.Buffer) == _options.LocalDeviceCall)
                 {
-                    var dataBytes = Encoding.UTF8.GetBytes(_options.ServerCallResponse);
-                    await udpClient.SendAsync(dataBytes,
-                                                new IPEndPoint(IPAddress.Broadcast, 
-                                                    _options.LocalDeviceUdpPort.Value), 
-                                                stoppingToken);
+                    await SendResponse(udpClient, stoppingToken);
                 }
             }
         }
 
+        private async Task SendResponse(UdpClient udpClient, CancellationToken stoppingToken)
+        {
+            var dataBytes = Encoding.UTF8.GetBytes(_options.ServerCallResponse);
+            await udpClient.SendAsync(dataBytes,
+                                        new IPEndPoint(IPAddress.Broadcast,
+                                        _options.LocalDeviceUdpPort.Value),
+                                        stoppingToken);
+        }
     }
 }

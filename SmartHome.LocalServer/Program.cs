@@ -6,7 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddGrpc();
 builder.Services.Configure<SmartHomeSettingsModel>(builder.Configuration.GetSection("SmartHomeSettings"));
-builder.Services.AddHostedService<DeviceDiscoverService>();
+builder.Services.AddHostedService<DeviceDiscoveryService>();
 
 var app = builder.Build();
 
