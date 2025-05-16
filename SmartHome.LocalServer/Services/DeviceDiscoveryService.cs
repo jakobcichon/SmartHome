@@ -30,18 +30,22 @@ namespace SmartHome.LocalServer.Services
                 
                 if (Encoding.UTF8.GetString(result.Buffer) == _options.LocalDeviceCall)
                 {
-                    await SendResponse(udpClient, stoppingToken);
+                    await SendResponse(udpClient, port, stoppingToken);
                 }
             }
         }
 
-        private async Task SendResponse(UdpClient udpClient, CancellationToken stoppingToken)
+        private async Task SendResponse(UdpClient udpClient, int clientPort, CancellationToken stoppingToken)
         {
             var dataBytes = Encoding.UTF8.GetBytes(_options.ServerCallResponse);
             await udpClient.SendAsync(dataBytes,
-                                        new IPEndPoint(IPAddress.Broadcast,
-                                        _options.LocalDeviceUdpPort.Value),
+                                        CreateClientIp(clientPort),
                                         stoppingToken);
+        }
+
+        private IPEndPoint CreateClientIp(int port)
+        {
+            return new IPEndPoint(IPAddress.Broadcast, port);
         }
     }
 }
