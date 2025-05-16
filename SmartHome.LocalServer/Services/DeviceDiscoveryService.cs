@@ -14,20 +14,16 @@ namespace SmartHome.LocalServer.Services
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            if (!_options.IsLocalDeviceUdpPortAvailable()) return;
-
-            var port = this._options.LocalDeviceUdpPort!.Value;
-
-            using UdpClient udpClient = new(port);
+            using UdpClient udpClient = new(this._options.UdpServerPort);
             udpClient.EnableBroadcast = true;
 
             while (!stoppingToken.IsCancellationRequested)
             {
-                await ListenForTheMessageAndRespond(port, udpClient, stoppingToken);
+                await ListenForTheMessageAndRespond(this._options.UdpClientPort, udpClient, stoppingToken);
             }
         }
 
-        private async Task ListenForTheMessageAndRespond(int port, UdpClient udpClient, CancellationToken stoppingToken)
+        private async Task ListenForTheMessageAndRespond(int clientPort, UdpClient udpClient, CancellationToken stoppingToken)
         {
             var result = await udpClient.ReceiveAsync(stoppingToken);
 
@@ -35,7 +31,7 @@ namespace SmartHome.LocalServer.Services
 
             if (IsHandshakeMessage(result))
             {
-                await SendResponse(udpClient, port, stoppingToken);
+                await SendResponse(udpClient, clientPort, stoppingToken);
             }
         }
 
@@ -46,7 +42,7 @@ namespace SmartHome.LocalServer.Services
 
         private async Task SendResponse(UdpClient udpClient, int port, CancellationToken stoppingToken)
         {
-            var dataBytes = Encoding.UTF8.GetBytes($"{_options.ServerCallResponse} GUID: {}");
+            var dataBytes = Encoding.UTF8.GetBytes($"{_options.ServerCallResponse} GUID: {_options.ServerGuid}");
             await udpClient.SendAsync(dataBytes, CreateBroadcastIpEndPoint(port), stoppingToken);
         }
 
