@@ -4,6 +4,7 @@ using SmartHome.LocalServer.Models.Settings;
 using Microsoft.Extensions.Options;
 using System.Net.Sockets;
 using System.Text;
+using System.Diagnostics;
 
 namespace SmartHome.LocalServer.Services
 {
@@ -13,10 +14,7 @@ namespace SmartHome.LocalServer.Services
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            if (!_options.IsLocalDeviceUdpPortAvailable())
-            {
-                return;
-            }
+            if (!_options.IsLocalDeviceUdpPortAvailable()) return;
 
             var port = this._options.LocalDeviceUdpPort!.Value;
 
@@ -25,23 +23,36 @@ namespace SmartHome.LocalServer.Services
 
             while (!stoppingToken.IsCancellationRequested)
             {
-                var result = await udpClient.ReceiveAsync(stoppingToken);
-                Console.WriteLine($"ReceivedMessage UDP broadcast: {Encoding.UTF8.GetString(result.Buffer)} from: {result.RemoteEndPoint.Address}");
-                
-                if (Encoding.UTF8.GetString(result.Buffer) == _options.LocalDeviceCall)
-                {
-                    await SendResponse(udpClient, stoppingToken);
-                }
+                await ListenForTheMessageAndRespond(port, udpClient, stoppingToken);
             }
         }
 
-        private async Task SendResponse(UdpClient udpClient, CancellationToken stoppingToken)
+        private async Task ListenForTheMessageAndRespond(int port, UdpClient udpClient, CancellationToken stoppingToken)
         {
-            var dataBytes = Encoding.UTF8.GetBytes(_options.ServerCallResponse);
-            await udpClient.SendAsync(dataBytes,
-                                        new IPEndPoint(IPAddress.Broadcast,
-                                        _options.LocalDeviceUdpPort.Value),
-                                        stoppingToken);
+            var result = await udpClient.ReceiveAsync(stoppingToken);
+
+            Debug.WriteLine($"ReceivedMessage UDP broadcast: {Encoding.UTF8.GetString(result.Buffer)} from: {result.RemoteEndPoint.Address}");
+
+            if (IsHandshakeMessage(result))
+            {
+                await SendResponse(udpClient, port, stoppingToken);
+            }
+        }
+
+        private bool IsHandshakeMessage(UdpReceiveResult result)
+        {
+            return Encoding.UTF8.GetString(result.Buffer) == _options.LocalDeviceCall;
+        }
+
+        private async Task SendResponse(UdpClient udpClient, int port, CancellationToken stoppingToken)
+        {
+            var dataBytes = Encoding.UTF8.GetBytes($"{_options.ServerCallResponse} GUID: {}");
+            await udpClient.SendAsync(dataBytes, CreateBroadcastIpEndPoint(port), stoppingToken);
+        }
+
+        private static IPEndPoint CreateBroadcastIpEndPoint(int port)
+        {
+            return new IPEndPoint(IPAddress.Broadcast, port);
         }
     }
 }
