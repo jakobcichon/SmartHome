@@ -19,7 +19,6 @@ public class DeviceDiscoveryServiceTests
                 LocalDeviceCall = "dummyLocalCall",
                 ServerCallResponse = "serverResponse"
             });
-        var dummyRequest = "dummyRequest"u8.ToArray();
         var mock = new Mock<IDeviceDiscoveryCommunicationInterface>();
         mock.Setup(e => e.ReceiveDataAsync(CancellationToken.None)).
             Returns(Task.FromResult(options.Value.LocalDeviceCall.ToUtf8()));
@@ -30,7 +29,10 @@ public class DeviceDiscoveryServiceTests
         dut.StartAsync(CancellationToken.None);
 
         //Assert
-        mock.Verify(e => e.ReceiveDataAsync().;
+        mock.Verify(e => e.ReceiveDataAsync(
+            It.IsAny<CancellationToken>()), Times.AtLeastOnce());
+        mock.Verify(e => e.SendDataAsync(
+            options.Value.ServerCallResponse.ToUtf8(), It.IsAny<CancellationToken>()));
 
     }
 }
