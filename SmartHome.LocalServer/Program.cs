@@ -1,4 +1,7 @@
+using Microsoft.Extensions.Options;
+using SmartHome.LocalServer.Extensions.Services.DeviceDiscovery;
 using SmartHome.LocalServer.Models.Settings;
+using SmartHome.LocalServer.Services.DeviceDiscovery;
 using SmartHome.LocalServer.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,6 +11,7 @@ builder.Services.AddGrpc();
 builder.Services.Configure<SmartHomeSettingsModel>(builder.Configuration.GetSection("SmartHomeSettings"));
 
 builder.Services.AddHostedService<DeviceDiscoveryService>();
+builder.Services.AdLocalDeviceDiscoveryServices();
 
 var app = builder.Build();
 
