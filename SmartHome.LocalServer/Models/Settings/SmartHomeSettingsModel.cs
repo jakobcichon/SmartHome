@@ -7,9 +7,9 @@ namespace SmartHome.LocalServer.Models.Settings
         [Required]
         public Guid ServerGuid { get; init; }
         [Required]
-        public int UdpServerPort { get; init; }
+        public int ClientUdpPort { get; init; }
         [Required]
-        public int UdpClientPort { get; init; }
+        public int ServerUdpPort { get; init; }
         [Required]
         public string LocalDeviceCall { get; init; } = string.Empty;
         [Required]
