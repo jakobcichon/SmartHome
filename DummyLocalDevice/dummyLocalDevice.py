@@ -6,10 +6,10 @@ udp_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 udp_socket.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
 
 
-udp_socket.bind(('192.168.0.73', 54321))
+udp_socket.bind(('127.0.0.1', 54322))
 
 
-udp_socket.sendto(message, ('255.255.255.255', 54321))
+udp_socket.sendto(message, ('127.0.0.1', 54321))
 
 print("Broadcast message sent to the network.")
 
