@@ -1,14 +1,14 @@
 using System.Net.Sockets;
 using System.Text;
 
-namespace SmartHome.LocalServer.Services.DeviceDiscovery;
+namespace SmartHomeClientApp.Services.LocalServerServices;
 
-public class UdpDeviceDiscoveryService : IDeviceDiscoveryService, IDisposable
+public class UdpServerDiscoveryService: IServerDiscoveryService
 {
     private readonly UdpClient _udpServer;
     private readonly UdpClient _udpClient;
     
-    public UdpDeviceDiscoveryService(int serverUdpPort, int clientUdpPort)
+    public UdpServerDiscoveryService(int serverUdpPort, int clientUdpPort)
     {
         _udpServer = new UdpClient(serverUdpPort);
         _udpServer.EnableBroadcast = true;
@@ -17,22 +17,16 @@ public class UdpDeviceDiscoveryService : IDeviceDiscoveryService, IDisposable
         _udpClient.EnableBroadcast = true;
     }
     
+    public async Task<int> SendRequestAsync(byte[] data, CancellationToken stoppingToken)
+    {
+        return await _udpServer.SendAsync(data, stoppingToken);
+    }
+
     public async Task<byte[]> ReceiveDataAsync(CancellationToken stoppingToken)
     {
-        var response = await _udpServer.ReceiveAsync(stoppingToken);
+        var response = await _udpClient.ReceiveAsync(stoppingToken);
         Console.WriteLine($"Received UDP message '{Encoding.UTF8.GetString(response.Buffer)}' " +
                           $"from '{response.RemoteEndPoint.Address}'");
         return response.Buffer;
-    }
-
-    public async Task<int> SendDataAsync(byte[] data, CancellationToken stoppingToken)
-    {
-        return await _udpClient.SendAsync(data, stoppingToken);
-    }
-
-    public void Dispose()
-    {
-        _udpServer.Dispose();
-        _udpClient.Dispose();
     }
 }

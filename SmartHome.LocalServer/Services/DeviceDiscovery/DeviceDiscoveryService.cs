@@ -5,7 +5,7 @@ using SmartHome.LocalServer.Models.Settings;
 
 namespace SmartHome.LocalServer.Services.DeviceDiscovery
 {
-    public class DeviceDiscoveryService(IDeviceDiscoveryCommunicationInterface commInterface, 
+    public class DeviceDiscoveryService(IDeviceDiscoveryService commInterface, 
         IOptions<SmartHomeSettingsModel> options) : BackgroundService
     {
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)

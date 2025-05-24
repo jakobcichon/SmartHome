@@ -23,7 +23,7 @@ public class DeviceDiscoveryServiceTests
     public void ExecuteAsync_ValidDeviceRequest_CallsTheRespondMethod()
     {
         //Arrange
-        var mock = new Mock<IDeviceDiscoveryCommunicationInterface>();
+        var mock = new Mock<IDeviceDiscoveryService>();
         var stoppingtokenSource = new CancellationTokenSource();
 
         mock.Setup(e => e.ReceiveDataAsync(It.IsAny<CancellationToken>()))
@@ -48,7 +48,7 @@ public class DeviceDiscoveryServiceTests
     public void ExecuteAsync_InvalidDeviceRequest_DontCallTheRespondMethod()
     {
         //Arrange
-        var mock = new Mock<IDeviceDiscoveryCommunicationInterface>();
+        var mock = new Mock<IDeviceDiscoveryService>();
         var stoppingtokenSource = new CancellationTokenSource();
 
         mock.Setup(e => e.ReceiveDataAsync(It.IsAny<CancellationToken>()))
