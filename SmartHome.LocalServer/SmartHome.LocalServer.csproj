@@ -21,4 +21,11 @@
       <ProjectReference Include="..\SmartHome.gRPC.Common\SmartHome.gRPC.Common.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <EmbeddedResource Include="..\SmartHome.Common\common.settings.json">
+        <Link>common.settings.json</Link>
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </EmbeddedResource>
+    </ItemGroup>
+
 </Project>

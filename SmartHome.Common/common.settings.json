@@ -1,0 +1,9 @@
+{
+  "SmartHomeSettings": {
+    "ServerGuid": "90d71318-d1ef-481b-b7be-1f7db499819b",
+    "ClientUdpPort": 54322,
+    "ServerUdpPort": 54321,
+    "LocalDeviceCall": "IsThereSmartHomeServer?",
+    "ServerCallResponse": "Hi!I'mSmartHomeServer! My GUID:{0}?"
+  }
+}
