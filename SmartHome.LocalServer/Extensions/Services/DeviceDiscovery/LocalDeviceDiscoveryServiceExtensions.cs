@@ -9,10 +9,10 @@ public static class LocalDeviceDiscoveryServiceExtensions
 {
     public static IServiceCollection AdLocalDeviceDiscoveryServices(this IServiceCollection serviceCollection)
     {
-        serviceCollection.AddTransient<IDeviceDiscoveryService>(services =>
+        serviceCollection.AddTransient<IDeviceDiscoveryCommunicationInterface>(services =>
         {
             var options = services.GetRequiredService<IOptions<SmartHomeSettingsModel>>().Value;
-            return new UdpDeviceDiscoveryService(options.ServerUdpPort, options.ClientUdpPort);
+            return new UdpDeviceDiscoveryInterface(options.ServerUdpPort, options.ClientUdpPort);
         });
         
         return serviceCollection;

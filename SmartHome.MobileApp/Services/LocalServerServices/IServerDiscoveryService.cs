@@ -1,7 +1,8 @@
-namespace SmartHomeClientApp.Services.LocalServerServices;
-
-public interface IServerDiscoveryService
+﻿namespace SmartHomeClientApp.Services.LocalServerServices
 {
-    Task<int> SendRequestAsync(byte[] data, CancellationToken stoppingToken);
-    Task<byte[]>  ReceiveDataAsync(CancellationToken stoppingToken);
+    internal interface IServerDiscoveryService
+    {
+        Task<LocalServerModel> GetFirstServerAsync();
+        Task<IEnumerable<LocalServerModel>> GetServersAsync();
+    }
 }

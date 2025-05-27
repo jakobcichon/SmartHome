@@ -1,6 +1,7 @@
 ﻿global using Grpc.Net.Client;
 using Microsoft.Extensions.Logging;
 using SmartHome.Protos;
+using SmartHome.Common.Extensions;
 
 namespace SmartHomeClientApp;
 
@@ -16,8 +17,9 @@ public static class MauiProgram
                 fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
             });
 
-        builder.Services.AddMauiBlazorWebView();
+        builder.Configuration.AddCommonConfiguration();
 
+        builder.Services.AddMauiBlazorWebView();
         builder.Services.AddScoped(services =>
         {
             return new HeatPump.HeatPumpClient(GrpcChannel.ForAddress("https://localhost:7234"));

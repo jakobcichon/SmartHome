@@ -1,14 +1,6 @@
 namespace SmartHomeClientApp.Services.LocalServerServices;
 
-public class ServerDiscoveryService : IServerDiscoveryService
-{
-    public Task<int> SendRequestAsync(byte[] data, CancellationToken stoppingToken)
-    {
-        throw new NotImplementedException();
-    }
+public class ServerDiscoveryService(IServerDiscoveryInterface commInterface): IServerDiscoveryService
+{ 
 
-    public Task<byte[]> ReceiveDataAsync(CancellationToken stoppingToken)
-    {
-        throw new NotImplementedException();
-    }
 }

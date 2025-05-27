@@ -3,12 +3,12 @@ using System.Text;
 
 namespace SmartHome.LocalServer.Services.DeviceDiscovery;
 
-public class UdpDeviceDiscoveryService : IDeviceDiscoveryService, IDisposable
+public class UdpDeviceDiscoveryInterface : IDeviceDiscoveryInterface, IDisposable
 {
     private readonly UdpClient _udpServer;
     private readonly UdpClient _udpClient;
     
-    public UdpDeviceDiscoveryService(int serverUdpPort, int clientUdpPort)
+    public UdpDeviceDiscoveryInterface(int serverUdpPort, int clientUdpPort)
     {
         _udpServer = new UdpClient(serverUdpPort);
         _udpServer.EnableBroadcast = true;

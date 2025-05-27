@@ -1,16 +1,14 @@
-using Microsoft.Extensions.Options;
 using SmartHome.LocalServer.Extensions.Services.DeviceDiscovery;
 using SmartHome.LocalServer.Models.Settings;
-using SmartHome.LocalServer.Services.DeviceDiscovery;
 using SmartHome.LocalServer.Services;
+using SmartHome.LocalServer.Services.DeviceDiscovery;
+using SmartHome.Common.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddGrpc();
-builder.Configuration.AddJsonFile(
-    Path.Join(AppDomain.CurrentDomain.BaseDirectory, "common.settings.json"), 
-    optional: false);
+builder.Configuration.AddCommonConfiguration();
 builder.Services.Configure<SmartHomeSettingsModel>(builder.Configuration.GetSection("SmartHomeSettings"));
 
 builder.Services.AddHostedService<DeviceDiscoveryService>();
