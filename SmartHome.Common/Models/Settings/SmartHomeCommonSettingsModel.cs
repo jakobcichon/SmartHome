@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace SmartHome.LocalServer.Models.Settings
+namespace SmartHome.Common.Models.Settings
 {
-    public record SmartHomeSettingsModel
+    public record SmartHomeCommonSettingsModel
     {
         [Required]
         public Guid ServerGuid { get; init; }

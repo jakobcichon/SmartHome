@@ -1,7 +1,7 @@
 using System.Net.Sockets;
 using System.Text;
 
-namespace SmartHomeClientApp.Services.LocalServerServices;
+namespace SmartHomeClientApp.Services.LocalServerServices.CommunicationInterfaces;
 
 public class UdpServerDiscoveryInterface : IServerDiscoveryInterface, IDisposable
 {
@@ -26,8 +26,9 @@ public class UdpServerDiscoveryInterface : IServerDiscoveryInterface, IDisposabl
         return await _udpServer.SendAsync(data, stoppingToken);
     }
 
-    public async Task<byte[]> ReceiveDataAsync(CancellationToken stoppingToken)
+    public async Task<byte[]> ReceiveDataAsync(CancellationToken stoppingToken, TimeSpan timeout)
     {
+        _udpClient.Client.ReceiveTimeout = timeout.TotalMilliseconds;
         var response = await _udpClient.ReceiveAsync(stoppingToken);
         Console.WriteLine($"Received UDP message '{Encoding.UTF8.GetString(response.Buffer)}' " +
                           $"from '{response.RemoteEndPoint.Address}'");

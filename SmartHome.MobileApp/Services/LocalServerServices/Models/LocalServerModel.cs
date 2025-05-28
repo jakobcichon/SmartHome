@@ -1,4 +1,4 @@
-﻿namespace SmartHomeClientApp.Services.LocalServerServices
+﻿namespace SmartHomeClientApp.Services.LocalServerServices.Models
 {
     internal record LocalServerModel
     {

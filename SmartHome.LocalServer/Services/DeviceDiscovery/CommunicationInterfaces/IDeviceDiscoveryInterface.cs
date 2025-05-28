@@ -1,4 +1,4 @@
-namespace SmartHome.LocalServer.Services.DeviceDiscovery;
+namespace SmartHome.LocalServer.Services.DeviceDiscovery.CommunicationInterfaces;
 
 public interface IDeviceDiscoveryInterface
 {

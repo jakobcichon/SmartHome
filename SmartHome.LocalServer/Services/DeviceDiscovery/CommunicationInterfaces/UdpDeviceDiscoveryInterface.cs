@@ -1,7 +1,7 @@
 using System.Net.Sockets;
 using System.Text;
 
-namespace SmartHome.LocalServer.Services.DeviceDiscovery;
+namespace SmartHome.LocalServer.Services.DeviceDiscovery.CommunicationInterfaces;
 
 public class UdpDeviceDiscoveryInterface : IDeviceDiscoveryInterface, IDisposable
 {
@@ -10,11 +10,15 @@ public class UdpDeviceDiscoveryInterface : IDeviceDiscoveryInterface, IDisposabl
     
     public UdpDeviceDiscoveryInterface(int serverUdpPort, int clientUdpPort)
     {
-        _udpServer = new UdpClient(serverUdpPort);
-        _udpServer.EnableBroadcast = true;
-        
-        _udpClient = new UdpClient(clientUdpPort);
-        _udpClient.EnableBroadcast = true;
+        _udpServer = new UdpClient(serverUdpPort)
+        {
+            EnableBroadcast = true
+        };
+
+        _udpClient = new UdpClient(clientUdpPort)
+        {
+            EnableBroadcast = true
+        };
     }
     
     public async Task<byte[]> ReceiveDataAsync(CancellationToken stoppingToken)

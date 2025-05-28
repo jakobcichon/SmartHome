@@ -1,18 +1,19 @@
 using Microsoft.Extensions.Options;
 using Moq;
 using SmartHome.Common.Extensions.String;
-using SmartHome.LocalServer.Models.Settings;
+using SmartHome.Common.Models.Settings;
 using SmartHome.LocalServer.Services.DeviceDiscovery;
+using SmartHome.LocalServer.Services.DeviceDiscovery.CommunicationInterfaces;
 
 namespace SmartHome.LocalServer.Tests.Services.DeviceDiscovery;
 
 public class DeviceDiscoveryServiceTests
 {
-    IOptions<SmartHomeSettingsModel> _options;
+    IOptions<SmartHomeCommonSettingsModel> _options;
     public DeviceDiscoveryServiceTests()
     {
         _options = Options.Create(
-            new SmartHomeSettingsModel()
+            new SmartHomeCommonSettingsModel()
             {
                 LocalDeviceCall = "dummyLocalCall",
                 ServerCallResponse = "dummyServerResponse"

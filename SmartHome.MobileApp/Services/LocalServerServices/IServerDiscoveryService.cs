@@ -1,8 +1,9 @@
-﻿namespace SmartHomeClientApp.Services.LocalServerServices
+﻿using SmartHomeClientApp.Services.LocalServerServices.Models;
+
+namespace SmartHomeClientApp.Services.LocalServerServices
 {
     internal interface IServerDiscoveryService
     {
-        Task<LocalServerModel> GetFirstServerAsync();
-        Task<IEnumerable<LocalServerModel>> GetServersAsync();
+        Task<LocalServerModel> GetFirstAvailableServerAsync(TimeSpan timeout, CancellationToken stoppingToken);
     }
 }

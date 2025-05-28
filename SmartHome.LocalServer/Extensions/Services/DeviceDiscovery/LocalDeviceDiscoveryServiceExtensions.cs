@@ -1,7 +1,8 @@
 using Microsoft.Extensions.Options;
-using SmartHome.LocalServer.Models.Settings;
+using SmartHome.Common.Models.Settings;
 using SmartHome.LocalServer.Services;
 using SmartHome.LocalServer.Services.DeviceDiscovery;
+using SmartHome.LocalServer.Services.DeviceDiscovery.CommunicationInterfaces;
 
 namespace SmartHome.LocalServer.Extensions.Services.DeviceDiscovery;
 
@@ -9,9 +10,9 @@ public static class LocalDeviceDiscoveryServiceExtensions
 {
     public static IServiceCollection AdLocalDeviceDiscoveryServices(this IServiceCollection serviceCollection)
     {
-        serviceCollection.AddTransient<IDeviceDiscoveryCommunicationInterface>(services =>
+        serviceCollection.AddTransient<IDeviceDiscoveryInterface>(services =>
         {
-            var options = services.GetRequiredService<IOptions<SmartHomeSettingsModel>>().Value;
+            var options = services.GetRequiredService<IOptions<SmartHomeCommonSettingsModel>>().Value;
             return new UdpDeviceDiscoveryInterface(options.ServerUdpPort, options.ClientUdpPort);
         });
         
