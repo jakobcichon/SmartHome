@@ -9,7 +9,7 @@ namespace SmartHomeClientApp.Services.LocalServerServices;
 public class ServerDiscoveryService(IServerDiscoveryInterface _commInterface, 
     IOptions<SmartHomeCommonSettingsModel> _options ) : IServerDiscoveryService
 {
-    async Task<LocalServerModel?> IServerDiscoveryService.GetFirstAvailableServerAsync(
+    public async Task<LocalServerModel?> GetFirstAvailableServerAsync(
         CancellationToken stoppingToken, TimeSpan timeout)
     {
         var linkedTokenSource = CancellationTokenSource.CreateLinkedTokenSource(stoppingToken, 
