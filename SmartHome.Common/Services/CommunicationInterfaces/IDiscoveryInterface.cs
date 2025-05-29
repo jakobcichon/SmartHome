@@ -1,6 +1,6 @@
-namespace SmartHomeClientApp.Services.LocalServerServices.CommunicationInterfaces;
+namespace SmartHome.Common.Services.CommunicationInterfaces;
 
-public interface IServerDiscoveryInterface
+public interface IDiscoveryInterface
 {
     Task<int> SendRequestAsync(byte[] data, CancellationToken stoppingToken);
     Task<byte[]>  ReceiveDataAsync(CancellationToken stoppingToken);

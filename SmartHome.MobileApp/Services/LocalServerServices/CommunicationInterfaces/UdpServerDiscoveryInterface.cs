@@ -1,9 +1,10 @@
+using SmartHome.Common.Services.CommunicationInterfaces;
 using System.Net.Sockets;
 using System.Text;
 
-namespace SmartHomeClientApp.Services.LocalServerServices.CommunicationInterfaces;
+namespace SmartHome.MobileApp.Services.LocalServerServices.CommunicationInterfaces;
 
-public class UdpServerDiscoveryInterface : IServerDiscoveryInterface, IDisposable
+public class UdpServerDiscoveryInterface : IDiscoveryInterface, IDisposable
 {
     private readonly UdpClient _udpServer;
     private readonly UdpClient _udpClient;

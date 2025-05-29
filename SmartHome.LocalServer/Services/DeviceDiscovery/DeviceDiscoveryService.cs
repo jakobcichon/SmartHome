@@ -1,13 +1,13 @@
-﻿using System.Text;
-using Microsoft.Extensions.Options;
+﻿using Microsoft.Extensions.Options;
 using SmartHome.Common.Extensions.String;
 using SmartHome.Common.Models.Settings;
-using SmartHome.LocalServer.Services.DeviceDiscovery.CommunicationInterfaces;
+using SmartHome.Common.Services.CommunicationInterfaces;
+using System.Text;
 
 
 namespace SmartHome.LocalServer.Services.DeviceDiscovery
 {
-    public class DeviceDiscoveryService(IDeviceDiscoveryInterface commInterface, 
+    public class DeviceDiscoveryService(IDiscoveryInterface commInterface, 
         IOptions<SmartHomeCommonSettingsModel> options) : BackgroundService
     {
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
@@ -23,7 +23,7 @@ namespace SmartHome.LocalServer.Services.DeviceDiscovery
         {
             if (result == options.Value.LocalDeviceCall)
             {
-                await commInterface.SendDataAsync((options.Value.ServerCallResponse + options.Value.ServerGuid).ToUtf8(), 
+                await commInterface.SendRequestAsync((options.Value.ServerCallResponse + options.Value.ServerGuid).ToUtf8(), 
                     stoppingToken);
             }
         }

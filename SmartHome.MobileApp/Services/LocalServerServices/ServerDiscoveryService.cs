@@ -1,33 +1,38 @@
 using Microsoft.Extensions.Options;
 using SmartHome.Common.Extensions.String;
 using SmartHome.Common.Models.Settings;
-using SmartHomeClientApp.Services.LocalServerServices.CommunicationInterfaces;
-using SmartHomeClientApp.Services.LocalServerServices.Models;
+using SmartHome.Common.Services.CommunicationInterfaces;
+using SmartHome.MobileApp.Services.LocalServerServices.Models;
+using System.Text;
 
-namespace SmartHomeClientApp.Services.LocalServerServices;
+namespace SmartHome.MobileApp.Services.LocalServerServices;
 
-public class ServerDiscoveryService(IServerDiscoveryInterface _commInterface, 
+public class ServerDiscoveryService(IDiscoveryInterface _commInterface, 
     IOptions<SmartHomeCommonSettingsModel> _options ) : IServerDiscoveryService
 {
     public async Task<LocalServerModel?> GetFirstAvailableServerAsync(
         CancellationToken stoppingToken, TimeSpan timeout)
     {
-        var linkedTokenSource = CancellationTokenSource.CreateLinkedTokenSource(stoppingToken, 
-            new CancellationTokenSource(timeout).Token);
-        
+        CancellationTokenSource linkedTokenSource = GetLinkedToken(timeout, stoppingToken);
+
         await _commInterface.SendRequestAsync(_options.Value.LocalDeviceCall.ToUtf8(), linkedTokenSource.Token);
 
         while (!linkedTokenSource.Token.IsCancellationRequested)
         {
-            var response = (await _commInterface.ReceiveDataAsync(linkedTokenSource.Token)).ToString() ?? 
-                           string.Empty;
-
+            var rawResponse = await _commInterface.ReceiveDataAsync(linkedTokenSource.Token);
+            var response = Encoding.UTF8.GetString(rawResponse);
             if (!response.Contains(_options.Value.ServerCallResponse)) continue;
             if (LocalServerModel.TryParse(response, null, out var serverModel)) return serverModel;
-            
+
             break;
         }
-        
+
         return null;
+    }
+
+    private static CancellationTokenSource GetLinkedToken(TimeSpan timeout, CancellationToken stoppingToken)
+    {
+        return CancellationTokenSource.CreateLinkedTokenSource(stoppingToken,
+            new CancellationTokenSource(timeout).Token);
     }
 }

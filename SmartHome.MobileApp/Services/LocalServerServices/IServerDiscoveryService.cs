@@ -1,6 +1,6 @@
-﻿using SmartHomeClientApp.Services.LocalServerServices.Models;
+﻿using SmartHome.MobileApp.Services.LocalServerServices.Models;
 
-namespace SmartHomeClientApp.Services.LocalServerServices
+namespace SmartHome.MobileApp.Services.LocalServerServices
 {
     internal interface IServerDiscoveryService
     {

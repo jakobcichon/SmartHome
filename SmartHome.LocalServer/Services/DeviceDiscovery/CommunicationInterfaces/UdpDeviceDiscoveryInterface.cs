@@ -1,9 +1,10 @@
+using SmartHome.Common.Services.CommunicationInterfaces;
 using System.Net.Sockets;
 using System.Text;
 
 namespace SmartHome.LocalServer.Services.DeviceDiscovery.CommunicationInterfaces;
 
-public class UdpDeviceDiscoveryInterface : IDeviceDiscoveryInterface, IDisposable
+public class UdpDeviceDiscoveryInterface : IDiscoveryInterface, IDisposable
 {
     private readonly UdpClient _udpServer;
     private readonly UdpClient _udpClient;
@@ -29,7 +30,7 @@ public class UdpDeviceDiscoveryInterface : IDeviceDiscoveryInterface, IDisposabl
         return response.Buffer;
     }
 
-    public async Task<int> SendDataAsync(byte[] data, CancellationToken stoppingToken)
+    public async Task<int> SendRequestAsync(byte[] data, CancellationToken stoppingToken)
     {
         return await _udpClient.SendAsync(data, stoppingToken);
     }

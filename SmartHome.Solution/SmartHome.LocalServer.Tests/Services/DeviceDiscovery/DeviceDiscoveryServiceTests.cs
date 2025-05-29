@@ -2,8 +2,8 @@ using Microsoft.Extensions.Options;
 using Moq;
 using SmartHome.Common.Extensions.String;
 using SmartHome.Common.Models.Settings;
+using SmartHome.Common.Services.CommunicationInterfaces;
 using SmartHome.LocalServer.Services.DeviceDiscovery;
-using SmartHome.LocalServer.Services.DeviceDiscovery.CommunicationInterfaces;
 
 namespace SmartHome.LocalServer.Tests.Services.DeviceDiscovery;
 
@@ -25,7 +25,7 @@ public class DeviceDiscoveryServiceTests
     public void ExecuteAsync_ValidDeviceRequest_CallsTheRespondMethod()
     {
         //Arrange
-        var mock = new Mock<IDeviceDiscoveryInterface>();
+        var mock = new Mock<IDiscoveryInterface>();
         var stoppingtokenSource = new CancellationTokenSource();
 
         mock.Setup(e => e.ReceiveDataAsync(It.IsAny<CancellationToken>()))
@@ -42,7 +42,7 @@ public class DeviceDiscoveryServiceTests
         //Assert
         mock.Verify(e => e.ReceiveDataAsync(
             It.IsAny<CancellationToken>()), Times.Once());
-        mock.Verify(e => e.SendDataAsync(
+        mock.Verify(e => e.SendRequestAsync(
             (_options.Value.ServerCallResponse + _options.Value.ServerGuid).ToUtf8(), 
             It.IsAny<CancellationToken>()));
     }
@@ -51,7 +51,7 @@ public class DeviceDiscoveryServiceTests
     public void ExecuteAsync_InvalidDeviceRequest_DontCallTheRespondMethod()
     {
         //Arrange
-        var mock = new Mock<IDeviceDiscoveryInterface>();
+        var mock = new Mock<IDiscoveryInterface>();
         var stoppingtokenSource = new CancellationTokenSource();
 
         mock.Setup(e => e.ReceiveDataAsync(It.IsAny<CancellationToken>()))
@@ -68,7 +68,7 @@ public class DeviceDiscoveryServiceTests
         //Assert
         mock.Verify(e => e.ReceiveDataAsync(
             It.IsAny<CancellationToken>()), Times.Once());
-        mock.Verify(e => e.SendDataAsync(It.IsAny<byte[]>(), It.IsAny<CancellationToken>()), Times.Never());
+        mock.Verify(e => e.SendRequestAsync(It.IsAny<byte[]>(), It.IsAny<CancellationToken>()), Times.Never());
 
     }
 }

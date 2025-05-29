@@ -2,7 +2,7 @@
 using System.Text.RegularExpressions;
 using static SmartHome.Common.Regex.RegexAuxiliaryFunctions;
 
-namespace SmartHomeClientApp.Services.LocalServerServices.Models;
+namespace SmartHome.MobileApp.Services.LocalServerServices.Models;
 
 public record LocalServerModel: IParsable<LocalServerModel?>
 {
