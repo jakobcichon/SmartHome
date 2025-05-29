@@ -6,15 +6,28 @@ using SmartHomeClientApp.Services.LocalServerServices.Models;
 
 namespace SmartHomeClientApp.Services.LocalServerServices;
 
-public class ServerDiscoveryService(IServerDiscoveryInterface _commInterface, IOptions<SmartHomeCommonSettingsModel> _options) : IServerDiscoveryService
+public class ServerDiscoveryService(IServerDiscoveryInterface _commInterface, 
+    IOptions<SmartHomeCommonSettingsModel> _options ) : IServerDiscoveryService
 {
-    public async Task<LocalServerModel> IServerDiscoveryService.GetFirstAvailableServerAsync(TimeSpan timeout, CancellationToken stoppingToken)
+    async Task<LocalServerModel?> IServerDiscoveryService.GetFirstAvailableServerAsync(
+        CancellationToken stoppingToken, TimeSpan timeout)
     {
-        await _commInterface.SendRequestAsync(_options.Value.LocalDeviceCall.ToUtf8(), stoppingToken);
+        var linkedTokenSource = CancellationTokenSource.CreateLinkedTokenSource(stoppingToken, 
+            new CancellationTokenSource(timeout).Token);
+        
+        await _commInterface.SendRequestAsync(_options.Value.LocalDeviceCall.ToUtf8(), linkedTokenSource.Token);
 
-        while (!stoppingToken.IsCancellationRequested)
+        while (!linkedTokenSource.Token.IsCancellationRequested)
         {
-            await _commInterface.ReceiveDataAsync(stoppingToken);
+            var response = (await _commInterface.ReceiveDataAsync(linkedTokenSource.Token)).ToString() ?? 
+                           string.Empty;
+
+            if (!response.Contains(_options.Value.ServerCallResponse)) continue;
+            if (LocalServerModel.TryParse(response, null, out var serverModel)) return serverModel;
+            
+            break;
         }
+        
+        return null;
     }
 }

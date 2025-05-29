@@ -23,7 +23,8 @@ namespace SmartHome.LocalServer.Services.DeviceDiscovery
         {
             if (result == options.Value.LocalDeviceCall)
             {
-                await commInterface.SendDataAsync(options.Value.ServerCallResponse.ToUtf8(), stoppingToken);
+                await commInterface.SendDataAsync((options.Value.ServerCallResponse + options.Value.ServerGuid).ToUtf8(), 
+                    stoppingToken);
             }
         }
     }

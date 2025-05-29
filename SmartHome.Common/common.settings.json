@@ -4,6 +4,6 @@
     "ClientUdpPort": 54322,
     "ServerUdpPort": 54321,
     "LocalDeviceCall": "IsThereSmartHomeServer?",
-    "ServerCallResponse": "Hi!I'mSmartHomeServer! My GUID:{0}?"
+    "ServerCallResponse": "Hi!I'mSmartHomeServer! My GUID:"
   }
 }

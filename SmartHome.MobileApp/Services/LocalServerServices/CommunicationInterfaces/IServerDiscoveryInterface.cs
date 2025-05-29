@@ -3,5 +3,5 @@ namespace SmartHomeClientApp.Services.LocalServerServices.CommunicationInterface
 public interface IServerDiscoveryInterface
 {
     Task<int> SendRequestAsync(byte[] data, CancellationToken stoppingToken);
-    Task<byte[]>  ReceiveDataAsync(CancellationToken stoppingToken, TimeSpan timeout);
+    Task<byte[]>  ReceiveDataAsync(CancellationToken stoppingToken);
 }
