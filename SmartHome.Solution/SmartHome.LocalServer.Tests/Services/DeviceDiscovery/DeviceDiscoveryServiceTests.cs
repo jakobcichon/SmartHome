@@ -16,7 +16,8 @@ public class DeviceDiscoveryServiceTests
             new SmartHomeCommonSettingsModel()
             {
                 LocalDeviceCall = "dummyLocalCall",
-                ServerCallResponse = "dummyServerResponse"
+                ServerCallResponse = "dummyServerResponse",
+                ServerGuid = Guid.NewGuid(),
             });
     }
 
@@ -42,7 +43,8 @@ public class DeviceDiscoveryServiceTests
         mock.Verify(e => e.ReceiveDataAsync(
             It.IsAny<CancellationToken>()), Times.Once());
         mock.Verify(e => e.SendDataAsync(
-            _options.Value.ServerCallResponse.ToUtf8(), It.IsAny<CancellationToken>()));
+            (_options.Value.ServerCallResponse + _options.Value.ServerGuid).ToUtf8(), 
+            It.IsAny<CancellationToken>()));
     }
 
     [Fact]
