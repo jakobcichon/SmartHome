@@ -1,4 +1,4 @@
-﻿namespace SmartHomeClientApp
+﻿namespace SmartHome.MobileApp
 {
     public partial class App : Application
     {
@@ -9,7 +9,7 @@
 
         protected override Window CreateWindow(IActivationState? activationState)
         {
-            return new Window(new MainPage()) { Title = "SmartHomeClientApp" };
+            return new Window(new MainPage()) { Title = "SmartHome.MobileApp" };
         }
     }
 }

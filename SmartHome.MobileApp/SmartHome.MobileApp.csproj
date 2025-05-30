@@ -14,7 +14,7 @@
         <!-- For example: <RuntimeIdentifiers>maccatalyst-x64;maccatalyst-arm64</RuntimeIdentifiers> -->
 
 		<OutputType Condition="'$(TargetFramework)' != 'net9.0'">Exe</OutputType>
-        <RootNamespace>SmartHomeClientApp</RootNamespace>
+        <RootNamespace>SmartHome.MobileApp</RootNamespace>
         <UseMaui>true</UseMaui>
         <SingleProject>true</SingleProject>
         <ImplicitUsings>enable</ImplicitUsings>
@@ -25,7 +25,7 @@
         <ApplicationTitle>SmartHome.MobileApp</ApplicationTitle>
 
         <!-- App Identifier -->
-        <ApplicationId>com.companyname.smarthomeclientapp</ApplicationId>
+        <ApplicationId>com.companyname.smarthome.mobileapp</ApplicationId>
 
         <!-- Versions -->
         <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
@@ -72,10 +72,6 @@
     <ItemGroup>
       <ProjectReference Include="..\SmartHome.Common\SmartHome.Common.csproj" />
       <ProjectReference Include="..\SmartHome.gRPC.Common\SmartHome.gRPC.Common.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="Models\LocalServer\" />
     </ItemGroup>
 
 </Project>

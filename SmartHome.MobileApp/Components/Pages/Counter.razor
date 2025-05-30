@@ -1,6 +1,4 @@
 ﻿@page "/counter"
-@using SmartHome.Protos
-@inject HeatPump.HeatPumpClient heatPumpClient
 
 <h1>Counter</h1>
 
@@ -13,15 +11,6 @@
 
     private void IncrementCount()
     {
-        try
-        {
-            var test = heatPumpClient.GetParameter(new GetParameterRequest { ParamName = "bla" });
-
-        }
-        catch(Exception e)
-        {
-            Console.WriteLine(e.Message);
-        }
-        ;
+        currentCount++;
     }
 }

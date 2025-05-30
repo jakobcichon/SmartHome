@@ -3,7 +3,7 @@ using Microsoft.Extensions.Logging;
 using SmartHome.Protos;
 using SmartHome.Common.Extensions;
 
-namespace SmartHomeClientApp;
+namespace SmartHome.MobileApp;
 
 public static class MauiProgram
 {

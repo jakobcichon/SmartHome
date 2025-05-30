@@ -1,4 +1,4 @@
-﻿namespace SmartHomeClientApp
+﻿namespace SmartHome.MobileApp
 {
     public partial class MainPage : ContentPage
     {

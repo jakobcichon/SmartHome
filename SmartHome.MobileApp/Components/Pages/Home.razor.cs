@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Components;
 
-namespace SmartHomeClientApp.Components.Pages;
+namespace SmartHome.MobileApp.Components.Pages;
 
 public partial class Home: ComponentBase, IDisposable
 {

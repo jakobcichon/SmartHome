@@ -1,7 +1,7 @@
 ﻿using ObjCRuntime;
 using UIKit;
 
-namespace SmartHomeClientApp
+namespace SmartHome.MobileApp
 {
     public class Program
     {

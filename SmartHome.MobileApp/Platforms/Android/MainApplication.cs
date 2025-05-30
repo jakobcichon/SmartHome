@@ -1,7 +1,7 @@
 ﻿using Android.App;
 using Android.Runtime;
 
-namespace SmartHomeClientApp
+namespace SmartHome.MobileApp
 {
     [Application]
     public class MainApplication : MauiApplication

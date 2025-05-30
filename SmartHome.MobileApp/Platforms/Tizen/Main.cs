@@ -2,7 +2,7 @@ using Microsoft.Maui;
 using Microsoft.Maui.Hosting;
 using System;
 
-namespace SmartHomeClientApp
+namespace SmartHome.MobileApp
 {
     internal class Program : MauiApplication
     {
