@@ -1,4 +1,5 @@
 ﻿global using Grpc.Net.Client;
+using System.Reflection;
 using Microsoft.Extensions.Logging;
 using SmartHome.Protos;
 using SmartHome.Common.Extensions;
@@ -16,7 +17,6 @@ public static class MauiProgram
             {
                 fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
             });
-
         builder.Configuration.AddCommonConfiguration();
 
         builder.Services.AddMauiBlazorWebView();

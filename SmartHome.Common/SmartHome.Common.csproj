@@ -12,9 +12,10 @@
     </ItemGroup>
 
     <ItemGroup>
-      <None Update="common.settings.json">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
+      <None Remove="common.settings.json" />
+      <EmbeddedResource Include="common.settings.json">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </EmbeddedResource>
     </ItemGroup>
 
 </Project>

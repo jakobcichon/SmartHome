@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Configuration;
+using System.Reflection;
 
 namespace SmartHome.Common.Extensions
 {
@@ -6,10 +7,9 @@ namespace SmartHome.Common.Extensions
     {
         public static IConfigurationBuilder AddCommonConfiguration(this IConfigurationBuilder builder)
         {
-            builder.AddJsonFile(
-                Path.Join(AppDomain.CurrentDomain.BaseDirectory, "common.settings.json"),
-                optional: false);
-
+            var a = Assembly.GetCallingAssembly();
+            using var stream = a.GetManifestResourceStream("SmartHome.MobileApp.common.settings.json");
+            builder.AddJsonStream(stream);
             return builder;
         }
     }
