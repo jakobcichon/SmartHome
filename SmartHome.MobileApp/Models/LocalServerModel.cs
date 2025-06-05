@@ -2,11 +2,12 @@
 using System.Text.RegularExpressions;
 using static SmartHome.Common.Regex.RegexAuxiliaryFunctions;
 
-namespace SmartHome.MobileApp.Services.LocalServerServices.Models;
+namespace SmartHome.MobileApp.Models;
 
 public record LocalServerModel: IParsable<LocalServerModel?>
 {
     public Guid Guid { get; init; }
+    public string? Name { get; set; }
     
     public static LocalServerModel Parse(string s, IFormatProvider? provider)
     {

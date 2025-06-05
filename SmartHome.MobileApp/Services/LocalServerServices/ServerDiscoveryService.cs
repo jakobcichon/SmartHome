@@ -2,8 +2,8 @@ using Microsoft.Extensions.Options;
 using SmartHome.Common.Extensions.String;
 using SmartHome.Common.Models.Settings;
 using SmartHome.Common.Services.CommunicationInterfaces;
-using SmartHome.MobileApp.Services.LocalServerServices.Models;
 using System.Text;
+using SmartHome.MobileApp.Models;
 
 namespace SmartHome.MobileApp.Services.LocalServerServices;
 

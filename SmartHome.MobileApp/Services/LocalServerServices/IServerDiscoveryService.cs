@@ -1,4 +1,4 @@
-﻿using SmartHome.MobileApp.Services.LocalServerServices.Models;
+﻿using SmartHome.MobileApp.Models;
 
 namespace SmartHome.MobileApp.Services.LocalServerServices
 {
