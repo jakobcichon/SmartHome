@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SmartHome.MobileApp.Prism.Views.MainPage"
+             xmlns:views="clr-namespace:SmartHome.MobileApp.Prism.Views"
+             >
+    <Grid>
+        <Grid.Background>
+            <SolidColorBrush Color="Indigo"/>
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50" x:Name="HeaderRow"/>
+            <RowDefinition Height="*" x:Name="ContentRow"/>
+            <RowDefinition Height="70" x:Name="MenuRow"/>
+        </Grid.RowDefinitions>
+
+        <HorizontalStackLayout HorizontalOptions="Center">
+        </HorizontalStackLayout>
+
+        <ScrollView Grid.Row="1" HorizontalOptions="Center">
+
+        </ScrollView>
+
+        <ContentView Grid.Row="2">
+            <views:MenuPaneView/>
+        </ContentView>
+    </Grid>
+</ContentPage>
