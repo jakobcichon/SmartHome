@@ -1,6 +1,8 @@
 ﻿using Microsoft.Extensions.Logging;
 using SmartHome.MobileApp.Prism.ViewModels;
+using SmartHome.MobileApp.Prism.ViewModels.MainPageViews;
 using SmartHome.MobileApp.Prism.Views;
+using SmartHome.MobileApp.Prism.Views.MainPageViews;
 
 namespace SmartHome.MobileApp.Prism
 {
@@ -21,6 +23,7 @@ namespace SmartHome.MobileApp.Prism
                 prism.RegisterTypes(container =>
                 {
                     container.RegisterForNavigation<MainPage, MainPageViewModel>();
+                    container.RegisterForRegionNavigation<DevicesView, DevicesViewModel>();
                 })
                 .CreateWindow("NavigationPage/MainPage");
 
