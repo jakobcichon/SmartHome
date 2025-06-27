@@ -1,8 +1,10 @@
 ﻿using Microsoft.Extensions.Logging;
 using SmartHome.MobileApp.Prism.ViewModels;
-using SmartHome.MobileApp.Prism.ViewModels.MainPageViews;
+using SmartHome.MobileApp.Prism.ViewModels.Home;
+using SmartHome.MobileApp.Prism.ViewModels.Menu;
 using SmartHome.MobileApp.Prism.Views;
-using SmartHome.MobileApp.Prism.Views.MainPageViews;
+using SmartHome.MobileApp.Prism.Views.Home;
+using SmartHome.MobileApp.Prism.Views.Menu;
 
 namespace SmartHome.MobileApp.Prism
 {
@@ -23,7 +25,8 @@ namespace SmartHome.MobileApp.Prism
                 prism.RegisterTypes(container =>
                 {
                     container.RegisterForNavigation<MainPage, MainPageViewModel>();
-                    container.RegisterForRegionNavigation<DevicesView, DevicesViewModel>();
+                    container.RegisterForRegionNavigation<HomeView, HomeViewModel>();
+                    container.RegisterForRegionNavigation<MenuView, MenuViewModel>();
                 })
                 .CreateWindow("NavigationPage/MainPage");
 

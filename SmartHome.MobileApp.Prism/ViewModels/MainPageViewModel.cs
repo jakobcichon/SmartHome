@@ -19,7 +19,7 @@ namespace SmartHome.MobileApp.Prism.ViewModels
 
         public void OnNavigatedTo(INavigationParameters parameters)
         {
-            _regionManager.RequestNavigate(MainPageRegionName, "DevicesView");
+            _regionManager.RequestNavigate(MainPageRegionName, "HomeView");
         }
     }
 }

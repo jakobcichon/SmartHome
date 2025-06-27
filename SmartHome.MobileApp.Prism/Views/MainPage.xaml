@@ -5,16 +5,26 @@
              x:Class="SmartHome.MobileApp.Prism.Views.MainPage"
              xmlns:views="clr-namespace:SmartHome.MobileApp.Prism.Views"
              >
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Grid">
+                <Setter Property="Background">
+                    <Setter.Value>
+                        <SolidColorBrush Color="LightSteelBlue"/>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
     <Grid>
-        <Grid.Background>
-            <SolidColorBrush Color="LightSteelBlue"/>
-        </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="50" x:Name="HeaderRow"/>
             <RowDefinition Height="*" x:Name="ContentRow"/>
+            <RowDefinition Height="auto" x:Name="Divider"/>
             <RowDefinition Height="70" x:Name="MenuRow"/>
         </Grid.RowDefinitions>
-
+        
         <HorizontalStackLayout HorizontalOptions="Center">
         </HorizontalStackLayout>
 
@@ -22,8 +32,14 @@
             <ContentView prism:RegionManager.RegionName="{Binding MainPageRegionName}"/>
         </ScrollView>
 
-        <ContentView Grid.Row="2">
-            <views:MenuPaneView/>
+        <Rectangle Grid.Row="2" 
+              Opacity="0.2" 
+              Shadow="4 4 16 AliceBlue 0.5"
+              HeightRequest="5"
+              Fill="Black"/>
+
+        <ContentView Grid.Row="3">
+            <views:MenuPaneView x:Name="MenuPane"/>
         </ContentView>
     </Grid>
 </ContentPage>

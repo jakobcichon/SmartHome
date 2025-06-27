@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="SmartHome.MobileApp.Prism.Views.MenuPaneView">
+             x:Class="SmartHome.MobileApp.Prism.Views.MenuPaneView"
+             xmlns:prism="http://prismlibrary.com">
 
     <ContentView.Resources>
         <ResourceDictionary>
@@ -22,7 +23,7 @@
                                HorizontalOptions="Center"
                                Spacing="10"
                                Padding="10">
-        <Button ImageSource="home.png"/>
+        <Button ImageSource="home.png" Command="{prism:Navigate 'NavigationPage/ViewA'}"/>
         <Button ImageSource="menu.png"/>
     </HorizontalStackLayout>
 </ContentView>
