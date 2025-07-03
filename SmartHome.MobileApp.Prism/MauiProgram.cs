@@ -24,7 +24,9 @@ namespace SmartHome.MobileApp.Prism
             {
                 prism.RegisterTypes(container =>
                 {
+                    
                     container.RegisterForNavigation<MainPage, MainPageViewModel>();
+
                     container.RegisterForRegionNavigation<HomeView, HomeViewModel>();
                     container.RegisterForRegionNavigation<MenuView, MenuViewModel>();
                 })

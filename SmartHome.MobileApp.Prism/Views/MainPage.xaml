@@ -24,7 +24,7 @@
             <RowDefinition Height="auto" x:Name="Divider"/>
             <RowDefinition Height="70" x:Name="MenuRow"/>
         </Grid.RowDefinitions>
-        
+
         <HorizontalStackLayout HorizontalOptions="Center">
         </HorizontalStackLayout>
 
@@ -38,8 +38,9 @@
               HeightRequest="5"
               Fill="Black"/>
 
-        <ContentView Grid.Row="3">
-            <views:MenuPaneView x:Name="MenuPane"/>
-        </ContentView>
+        <HorizontalStackLayout Grid.Row="3">
+            <Button ImageSource="home.png" />
+            <Button ImageSource="menu.png" Command="{prism:NavigateTo Name=HomeView}"/>
+        </HorizontalStackLayout>
     </Grid>
 </ContentPage>
