@@ -38,9 +38,12 @@
               HeightRequest="5"
               Fill="Black"/>
 
-        <HorizontalStackLayout Grid.Row="3">
+        <HorizontalStackLayout Grid.Row="3"
+                               HorizontalOptions="Center" 
+                               Spacing="5"
+                               Margin="5">
             <Button ImageSource="home.png" />
-            <Button ImageSource="menu.png" Command="{prism:NavigateTo Name=HomeView}"/>
+            <Button ImageSource="menu.png" Command="{prism:NavigateTo Name=MainPageContent/MenuView}"/>
         </HorizontalStackLayout>
     </Grid>
 </ContentPage>
