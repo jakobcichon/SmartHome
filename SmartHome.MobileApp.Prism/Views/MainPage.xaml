@@ -39,11 +39,10 @@
               Fill="Black"/>
 
         <HorizontalStackLayout Grid.Row="3"
-                               HorizontalOptions="Center" 
-                               Spacing="5"
-                               Margin="5">
-            <Button ImageSource="home.png" />
-            <Button ImageSource="menu.png" Command="{prism:NavigateTo Name=MainPageContent/MenuView}"/>
+                               Padding="5"
+                               Spacing="5">
+            <Button ImageSource="home.png" Command="{Binding NavigateToHomeCommand}"/>
+            <Button ImageSource="menu.png" Command="{Binding NavigateToMenuCommand}"/>
         </HorizontalStackLayout>
     </Grid>
 </ContentPage>
