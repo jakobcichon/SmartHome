@@ -90,4 +90,11 @@
 	  </MauiXaml>
 	</ItemGroup>
 
+	<ItemGroup>
+	  <MauiXaml Remove="Resources\Converters\ConvertersDict.xaml" />
+	  <Resource Include="Resources\Converters\ConvertersDict.xaml">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Resource>
+	</ItemGroup>
+
 </Project>

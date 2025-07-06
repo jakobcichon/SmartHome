@@ -15,6 +15,9 @@
                 </Setter>
             </Style>
         </ResourceDictionary>
+        <ResourceDictionary.MergedDictionaries>
+            <ResourceDictionary Source="../Resources/Converters/ConvertersDict.xaml"></ResourceDictionary>
+        </ResourceDictionary.MergedDictionaries>
     </ContentPage.Resources>
 
     <Grid>
@@ -28,9 +31,9 @@
         <HorizontalStackLayout HorizontalOptions="Center">
         </HorizontalStackLayout>
 
-        <ScrollView Grid.Row="1" HorizontalOptions="Center">
+        <Grid Grid.Row="1" HorizontalOptions="Center">
             <ContentView prism:RegionManager.RegionName="{Binding MainPageRegionName}"/>
-        </ScrollView>
+        </Grid>
 
         <Rectangle Grid.Row="2" 
               Opacity="0.2" 
@@ -39,6 +42,7 @@
               Fill="Black"/>
 
         <HorizontalStackLayout Grid.Row="3"
+                               HorizontalOptions="Center"
                                Padding="5"
                                Spacing="5">
             <Button ImageSource="home.png" Command="{Binding NavigateToHomeCommand}"/>
