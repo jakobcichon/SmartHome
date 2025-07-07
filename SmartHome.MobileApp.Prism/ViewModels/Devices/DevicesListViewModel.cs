@@ -1,25 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlTypes;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using SmartHome.MobileApp.Prism.Models.Devices;
+using System.Collections.ObjectModel;
 
 namespace SmartHome.MobileApp.Prism.ViewModels.Devices
 {
     class DevicesListViewModel: BindableBase
     {
-        private bool _isAnDeviceAvailable;
+        public bool IsAnyDeviceAvailable => Devices.Count > 0;
 
-        public bool IsAnDeviceAvailable
+        private ObservableCollection<BasicDeviceModel> _devices;
+
+        public ObservableCollection<BasicDeviceModel> Devices
         {
-            get => _isAnDeviceAvailable;
-            set => SetProperty(ref _isAnDeviceAvailable, value);
+            get { return _devices; }
+            set { SetProperty(ref _devices, value); }
         }
 
         public DevicesListViewModel()
         {
-            IsAnDeviceAvailable = true;
+            _devices = [];
+
+            _devices.Add(new BasicDeviceModel());
+            _devices.Add(new BasicDeviceModel());
         }
     }
 }

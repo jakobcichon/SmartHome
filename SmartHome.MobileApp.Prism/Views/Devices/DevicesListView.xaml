@@ -2,9 +2,63 @@
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SmartHome.MobileApp.Prism.Views.Home.DevicesListView">
-    <StackLayout VerticalOptions="Center">
-        <Button ImageSource="add_icon" 
-                IsVisible="{Binding IsAnDeviceAvailable,
-                Converter={StaticResource Key=BooleanNegationConverter}}"></Button>
-    </StackLayout>
+    <VerticalStackLayout>
+        <VerticalStackLayout x:Name="NoDevicesLayout" 
+                            VerticalOptions="Center"
+                            IsVisible="{Binding IsAnyDeviceAvailable, 
+                                        Converter={StaticResource Key=BooleanNegationConverter}}">
+            <Button ImageSource="add_icon.png" 
+                    StyleClass="SizableOnPressed"/>
+            <Label Text="No devices found"/>
+        </VerticalStackLayout>
+
+        <VerticalStackLayout x:Name="DevicesLayout" 
+                            VerticalOptions="Center"
+                            IsVisible="{Binding IsAnyDeviceAvailable}">
+            <CollectionView ItemsSource="{Binding Devices}"
+                            SelectionMode="Single"
+                            Margin="5">
+
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout ItemSpacing="5" 
+                                       Orientation="Vertical"/>
+                </CollectionView.ItemsLayout>
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Border StrokeThickness="0">
+                            <Grid Padding="2">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="20"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Label Grid.Row="0" 
+                                       Grid.Column="1" 
+                                       FontSize="Medium"
+                                       Text="{Binding Name}"
+                                       HorizontalOptions="Center"/>
+
+                                <VerticalStackLayout Grid.Row="1" 
+                                                     Grid.ColumnSpan="2">
+                                    <Label Text="{Binding Type}"
+                                            HorizontalOptions="Start"/>
+                                    <Label Text="{Binding Status}"
+                                            HorizontalOptions="Start"/>
+                                </VerticalStackLayout>
+                            </Grid>
+                        </Border>
+
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+
+            </CollectionView>
+        </VerticalStackLayout>
+
+    </VerticalStackLayout>
+
 </ContentView>
