@@ -13,8 +13,8 @@ namespace SmartHome.MobileApp.Prism.ViewModels.Devices
 
         public bool IsAnDeviceAvailable
         {
-            get { return _isAnDeviceAvailable; }
-            set { SetProperty(ref _isAnDeviceAvailable, value); }
+            get => _isAnDeviceAvailable;
+            set => SetProperty(ref _isAnDeviceAvailable, value);
         }
 
         public DevicesListViewModel()
