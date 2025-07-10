@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="SmartHome.MobileApp.Prism.Views.Home.DevicesListView">
+             x:Class="SmartHome.MobileApp.Prism.Views.Devices.DevicesListView"
+             StyleClass="mainThemeBackground" >
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         
         <VerticalStackLayout x:Name="NoDevicesLayout" 
@@ -12,7 +13,7 @@
                             IsVisible="{Binding IsAnyDeviceAvailable, 
                                         Converter={StaticResource Key=BooleanNegationConverter}}">
             <Button ImageSource="add_icon.png" 
-                    StyleClass="EnlargedOnPointerOver"/>
+                    StyleClass="Enlarged"/>
             <Label Text="No devices found"/>
         </VerticalStackLayout>
 
@@ -53,4 +54,4 @@
 
     </Grid>
 
-</ContentView>
+</ContentPage>

@@ -1,6 +1,6 @@
-namespace SmartHome.MobileApp.Prism.Views.Home;
+namespace SmartHome.MobileApp.Prism.Views.Devices;
 
-public partial class DevicesListView : ContentView
+public partial class DevicesListView : ContentPage
 {
 	public DevicesListView()
 	{

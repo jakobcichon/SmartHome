@@ -426,19 +426,6 @@
         <Setter Property="Shadow" Value="4 4 16 Black 0.5"/>
     </Style>
 
-
-    <Style TargetType="VisualElement"
-           Class="defaultButton"
-           ApplyToDerivedTypes="True">
-        <Setter Property="BackgroundColor" Value="Yellow"/>
-    </Style>
-
-    <Style TargetType="VisualElement"
-           Class="defaultButton2"
-           ApplyToDerivedTypes="True"
-           BaseResourceKey="defaultButton">
-    </Style>
-
     <Style TargetType="VisualElement" 
            Class="Enlarged"
            ApplyToDerivedTypes="True"

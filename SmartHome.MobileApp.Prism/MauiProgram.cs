@@ -3,7 +3,7 @@ using SmartHome.MobileApp.Prism.ViewModels;
 using SmartHome.MobileApp.Prism.ViewModels.Devices;
 using SmartHome.MobileApp.Prism.ViewModels.Menu;
 using SmartHome.MobileApp.Prism.Views;
-using SmartHome.MobileApp.Prism.Views.Home;
+using SmartHome.MobileApp.Prism.Views.Devices;
 using SmartHome.MobileApp.Prism.Views.Menu;
 
 namespace SmartHome.MobileApp.Prism
@@ -26,9 +26,8 @@ namespace SmartHome.MobileApp.Prism
                 {
                     
                     container.RegisterForNavigation<MainPage, MainPageViewModel>();
-
-                    container.RegisterForRegionNavigation<DevicesListView, DevicesListViewModel>();
-                    container.RegisterForRegionNavigation<MenuView, MenuViewModel>();
+                    container.RegisterForNavigation<DevicesListView, DevicesListViewModel>();
+                    container.RegisterForNavigation<MenuView, MenuViewModel>();
                 })
                 .CreateWindow("NavigationPage/MainPage");
 
