@@ -4,19 +4,7 @@
              xmlns:prism="http://prismlibrary.com"
              x:Class="SmartHome.MobileApp.Prism.Views.MainPage"
              xmlns:views="clr-namespace:SmartHome.MobileApp.Prism.Views"
-             >
-    <ContentPage.Resources>
-        <ResourceDictionary>
-            <Style TargetType="Grid">
-                <Setter Property="Background">
-                    <Setter.Value>
-                        <SolidColorBrush Color="LightSteelBlue"/>
-                    </Setter.Value>
-                </Setter>
-            </Style>
-        </ResourceDictionary>
-    </ContentPage.Resources>
-
+             StyleClass="mainThemeBackground">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50" x:Name="HeaderRow"/>
@@ -29,25 +17,31 @@
         </HorizontalStackLayout>
 
         <Grid Grid.Row="1" HorizontalOptions="Center">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
             <ContentView prism:RegionManager.RegionName="{Binding MainPageRegionName}"/>
         </Grid>
 
-        <Rectangle Grid.Row="2" 
-              Opacity="0.2" 
-              Shadow="4 4 16 AliceBlue 0.5"
-              HeightRequest="5"
-              Fill="Black"/>
+        <Rectangle Grid.Row="2"
+                   StyleClass="ShadowElement"
+                  Opacity="0.2" 
+                  HeightRequest="5"
+                  Fill="Black"/>
 
         <HorizontalStackLayout Grid.Row="3"
                                HorizontalOptions="Center"
                                Padding="5"
                                Spacing="5">
             <Button ImageSource="home.png" 
-                    StyleClass="SizableOnPressed"
-                    Command="{Binding NavigateToHomeCommand}"/>
+                    StyleClass="defaultButton"
+                    Command="{Binding NavigateToHomeCommand}"
+                    Margin="5"/>
             <Button ImageSource="menu.png"
-                    StyleClass="SizableOnPressed"
-                    Command="{Binding NavigateToMenuCommand}">
+                    StyleClass="defaultButton2"
+                    Command="{Binding NavigateToMenuCommand}"
+                    Margin="5"
+  >
                 
             </Button>
         </HorizontalStackLayout>

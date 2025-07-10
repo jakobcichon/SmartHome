@@ -1,0 +1,11 @@
+﻿.mainThemeBackground {
+    background-color: lightblue;
+}
+
+.defaultButton {
+    border-width: 0;
+    background-color: transparent;
+    -maui-shadow: 5, 5, 20, white, 0.2;
+}
+
+
