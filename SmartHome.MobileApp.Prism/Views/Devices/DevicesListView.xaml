@@ -3,17 +3,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SmartHome.MobileApp.Prism.Views.Devices.DevicesListView"
              StyleClass="mainThemeBackground" >
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        
+    <VerticalStackLayout HorizontalOptions="Center"
+                         VerticalOptions="Center">
         <VerticalStackLayout x:Name="NoDevicesLayout" 
                             VerticalOptions="Center"
                             IsVisible="{Binding IsAnyDeviceAvailable, 
-                                        Converter={StaticResource Key=BooleanNegationConverter}}">
+                                        Converter={StaticResource Key=BooleanNegationConverter}}"
+                             Spacing="10"
+                             Margin="10">
             <Button ImageSource="add_icon.png" 
-                    StyleClass="Enlarged"/>
+                    StyleClass="Enlarged, Shadow"/>
             <Label Text="No devices found"/>
         </VerticalStackLayout>
 
@@ -52,6 +51,6 @@
             </BindableLayout.ItemTemplate>
         </VerticalStackLayout>
 
-    </Grid>
+    </VerticalStackLayout>
 
 </ContentPage>

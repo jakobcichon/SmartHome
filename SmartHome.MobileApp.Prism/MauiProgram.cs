@@ -28,6 +28,10 @@ namespace SmartHome.MobileApp.Prism
                     container.RegisterForNavigation<MainPage, MainPageViewModel>();
                     container.RegisterForNavigation<DevicesListView, DevicesListViewModel>();
                     container.RegisterForNavigation<MenuView, MenuViewModel>();
+
+                    container.Register<>
+
+
                 })
                 .CreateWindow("NavigationPage/MainPage");
 

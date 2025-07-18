@@ -7,20 +7,12 @@ namespace SmartHome.MobileApp.Prism.ViewModels.Devices
     {
         public bool IsAnyDeviceAvailable => Devices.Count > 0;
 
-        private ObservableCollection<BasicDeviceModel> _devices;
+        private ObservableCollection<BasicDeviceModel> _devices = [];
 
         public ObservableCollection<BasicDeviceModel> Devices
         {
             get { return _devices; }
             set { SetProperty(ref _devices, value); }
-        }
-
-        public DevicesListViewModel()
-        {
-            _devices = [];
-
-            _devices.Add(new BasicDeviceModel());
-            _devices.Add(new BasicDeviceModel());
         }
     }
 }

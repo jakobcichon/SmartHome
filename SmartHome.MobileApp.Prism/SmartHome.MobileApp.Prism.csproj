@@ -73,6 +73,11 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <ProjectReference Include="..\SmartHome.Common\SmartHome.Common.csproj" />
+	  <ProjectReference Include="..\SmartHome.gRPC.Common\SmartHome.gRPC.Common.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <Compile Update="Views\MainPage.xaml.cs">
 	    <DependentUpon>MainPage.xaml</DependentUpon>
 	  </Compile>
