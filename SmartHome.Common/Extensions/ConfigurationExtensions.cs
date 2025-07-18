@@ -8,7 +8,7 @@ namespace SmartHome.Common.Extensions
         public static IConfigurationBuilder AddCommonConfiguration(this IConfigurationBuilder builder)
         {
             var a = Assembly.GetCallingAssembly();
-            using var stream = a.GetManifestResourceStream("SmartHome.MobileApp.common.settings.json");
+            using var stream = a.GetManifestResourceStream($"{a.GetName().Name}.common.settings.json");
             builder.AddJsonStream(stream);
             return builder;
         }
