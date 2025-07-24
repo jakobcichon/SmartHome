@@ -12,7 +12,8 @@
                              Spacing="10"
                              Margin="10">
             <Button ImageSource="add_icon.png" 
-                    StyleClass="Enlarged, Shadow"/>
+                    StyleClass="Enlarged, Shadow"
+                    Command="{Binding CheckLocalServersCommand}"/>
             <Label Text="No devices found"/>
         </VerticalStackLayout>
 
