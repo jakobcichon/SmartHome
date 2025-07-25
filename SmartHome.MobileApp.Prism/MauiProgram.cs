@@ -3,6 +3,7 @@ using Microsoft.Extensions.Options;
 using SmartHome.Common.Extensions;
 using SmartHome.Common.Models.Settings;
 using SmartHome.Common.Services.CommunicationInterfaces;
+using SmartHome.MobileApp.Prism.Extensions.Prism;
 using SmartHome.MobileApp.Prism.ViewModels;
 using SmartHome.MobileApp.Prism.ViewModels.Devices;
 using SmartHome.MobileApp.Prism.ViewModels.Menu;
@@ -28,28 +29,7 @@ namespace SmartHome.MobileApp.Prism
                 });
             builder.UsePrism(new DryIocContainerExtension(), prism =>
             {
-                prism.RegisterTypes(container =>
-                {
-                    
-                    container.RegisterForNavigation<MainPage, MainPageViewModel>();
-                    container.RegisterForNavigation<DevicesListView, DevicesListViewModel>();
-                    container.RegisterForNavigation<MenuView, MenuViewModel>();
-
-                    container.Register<IDiscoveryInterface>(c =>
-                    {
-                        var commonSettingsModel = c.Resolve<IOptions<SmartHomeCommonSettingsModel>>().Value;
-                        var serverPort = commonSettingsModel.ServerUdpPort;
-                        var clientPort = commonSettingsModel.ClientUdpPort;
-
-                        return new UdpServerDiscoveryInterface(serverPort, clientPort);
-                    });
-
-                    container.Register<IServerDiscoveryService>(c =>
-                    {
-                        return new ServerDiscoveryService(c.Resolve<IDiscoveryInterface>(),
-                            c.Resolve<IOptions<SmartHomeCommonSettingsModel>>());
-                    });
-                })
+                prism.Configure()
                 .CreateWindow("NavigationPage/MainPage");
 
             });
