@@ -4,6 +4,7 @@ using SmartHome.Common.Models.Settings;
 using SmartHome.Common.Services.CommunicationInterfaces;
 using System.Text;
 using SmartHome.MobileApp.Models;
+using System.Net;
 
 namespace SmartHome.MobileApp.Services.LocalServerServices;
 
@@ -15,14 +16,16 @@ public class ServerDiscoveryService(IDiscoveryInterface _commInterface,
     {
         CancellationTokenSource linkedTokenSource = GetLinkedToken(timeout, stoppingToken);
 
-        await _commInterface.SendRequestAsync(_options.Value.LocalDeviceCall.ToUtf8(), linkedTokenSource.Token);
+        await _commInterface.SendRequestAsync(_options.Value.LocalDeviceCall.ToUtf8(), 
+            new IPEndPoint(IPAddress.Broadcast, _options.Value.ClientUdpPort),
+            linkedTokenSource.Token);
 
         while (!linkedTokenSource.Token.IsCancellationRequested)
         {
             var rawResponse = await _commInterface.ReceiveDataAsync(linkedTokenSource.Token);
-            var response = Encoding.UTF8.GetString(rawResponse);
-            if (!response.Contains(_options.Value.ServerCallResponse)) continue;
-            if (LocalServerModel.TryParse(response, null, out var serverModel)) return serverModel;
+            var deviceCall = Encoding.UTF8.GetString(rawResponse.Buffer);
+            if (!deviceCall.Contains(_options.Value.ServerCallResponse)) continue;
+            if (LocalServerModel.TryParse(deviceCall, null, out var serverModel)) return serverModel;
 
             break;
         }

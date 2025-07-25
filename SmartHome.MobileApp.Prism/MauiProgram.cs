@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using SmartHome.Common.Extensions;
 using SmartHome.Common.Models.Settings;
 using SmartHome.Common.Services.CommunicationInterfaces;
@@ -34,14 +35,20 @@ namespace SmartHome.MobileApp.Prism
                     container.RegisterForNavigation<DevicesListView, DevicesListViewModel>();
                     container.RegisterForNavigation<MenuView, MenuViewModel>();
 
-                    container.Register<IDiscoveryInterface>(container =>
+                    container.Register<IDiscoveryInterface>(c =>
                     {
-                        var serverPort = container.Resolve<SmartHomeCommonSettingsModel>().ServerUdpPort;
-                        var clientPort = container.Resolve<SmartHomeCommonSettingsModel>().ClientUdpPort;
+                        var commonSettingsModel = c.Resolve<IOptions<SmartHomeCommonSettingsModel>>().Value;
+                        var serverPort = commonSettingsModel.ServerUdpPort;
+                        var clientPort = commonSettingsModel.ClientUdpPort;
 
                         return new UdpServerDiscoveryInterface(serverPort, clientPort);
                     });
-                    container.Register<IServerDiscoveryService, ServerDiscoveryService>();
+
+                    container.Register<IServerDiscoveryService>(c =>
+                    {
+                        return new ServerDiscoveryService(c.Resolve<IDiscoveryInterface>(),
+                            c.Resolve<IOptions<SmartHomeCommonSettingsModel>>());
+                    });
                 })
                 .CreateWindow("NavigationPage/MainPage");
 

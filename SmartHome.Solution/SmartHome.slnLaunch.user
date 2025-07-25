@@ -1,14 +1,16 @@
 [
   {
-    "Name": "New Profile",
+    "Name": "LocalServer_MobileApp",
     "Projects": [
       {
         "Path": "..\\SmartHome.LocalServer\\SmartHome.LocalServer.csproj",
-        "Action": "Start"
+        "Action": "Start",
+        "DebugTarget": "https"
       },
       {
-        "Path": "..\\SmartHome.MobileApp\\SmartHome.MobileApp.csproj",
-        "Action": "Start"
+        "Path": "..\\SmartHome.MobileApp.Prism\\SmartHome.MobileApp.Prism.csproj",
+        "Action": "Start",
+        "DebugTarget": "Windows Machine"
       }
     ]
   }

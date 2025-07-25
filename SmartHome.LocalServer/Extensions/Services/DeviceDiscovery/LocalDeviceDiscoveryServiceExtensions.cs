@@ -12,7 +12,7 @@ public static class LocalDeviceDiscoveryServiceExtensions
         serviceCollection.AddTransient<IDiscoveryInterface>(services =>
         {
             var options = services.GetRequiredService<IOptions<SmartHomeCommonSettingsModel>>().Value;
-            return new UdpDeviceDiscoveryInterface(options.ServerUdpPort, options.ClientUdpPort);
+            return new UdpDeviceDiscoveryInterface(options.ServerUdpPort);
         });
         
         return serviceCollection;
