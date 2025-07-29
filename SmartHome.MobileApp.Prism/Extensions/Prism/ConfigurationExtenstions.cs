@@ -7,12 +7,13 @@ using SmartHome.MobileApp.Prism.ViewModels.Menu;
 using SmartHome.MobileApp.Prism.Views;
 using SmartHome.MobileApp.Prism.Views.Devices;
 using SmartHome.MobileApp.Prism.Views.Menu;
+using SmartHome.MobileApp.Repositories.LocalServer;
 using SmartHome.MobileApp.Services.LocalServerServices;
 using SmartHome.MobileApp.Services.LocalServerServices.CommunicationInterfaces;
 
 namespace SmartHome.MobileApp.Prism.Extensions.Prism
 {
-    internal static class PrismConfigurationExtenstions
+    internal static class ConfigurationExtenstions
     {
         public static PrismAppBuilder Configure(this PrismAppBuilder builder)
         {
@@ -22,6 +23,7 @@ namespace SmartHome.MobileApp.Prism.Extensions.Prism
                 registry.RegisterServices();
 
             });
+
             return builder;
         }
 
@@ -49,6 +51,11 @@ namespace SmartHome.MobileApp.Prism.Extensions.Prism
             {
                 return new ServerDiscoveryService(provider.Resolve<IDiscoveryInterface>(),
                     provider.Resolve<IOptions<SmartHomeCommonSettingsModel>>());
+            });
+
+            registry.RegisterSingleton<ILocalServerRepository>(provider =>
+            {
+                return new JsonLocalServerRepository(Path.Combine(FileSystem.CacheDirectory, "LocalServerRepository", "ServerList.json"));
             });
 
             return registry;

@@ -1,17 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using SmartHome.Common.Extensions;
-using SmartHome.Common.Models.Settings;
-using SmartHome.Common.Services.CommunicationInterfaces;
+using SmartHome.MobileApp.Prism.Extensions.Maui;
 using SmartHome.MobileApp.Prism.Extensions.Prism;
-using SmartHome.MobileApp.Prism.ViewModels;
-using SmartHome.MobileApp.Prism.ViewModels.Devices;
-using SmartHome.MobileApp.Prism.ViewModels.Menu;
-using SmartHome.MobileApp.Prism.Views;
-using SmartHome.MobileApp.Prism.Views.Devices;
-using SmartHome.MobileApp.Prism.Views.Menu;
-using SmartHome.MobileApp.Services.LocalServerServices;
-using SmartHome.MobileApp.Services.LocalServerServices.CommunicationInterfaces;
 
 namespace SmartHome.MobileApp.Prism
 {
@@ -34,9 +24,8 @@ namespace SmartHome.MobileApp.Prism
 
             });
             builder.Configuration.AddCommonConfiguration();
-            builder.Services.Configure<SmartHomeCommonSettingsModel>(builder.Configuration.GetSection("SmartHomeSettings"));
+            builder.BindConfigurationToModel();
 
-    
 #if DEBUG
             builder.Logging.AddDebug();
 #endif
